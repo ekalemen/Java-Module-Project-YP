@@ -19,13 +19,18 @@ public class Main {
             int carSpeed;
             while (true) {
                 System.out.print("Скорость (км/ч): ");
-                carSpeed = scanner.nextInt();
-                if (carSpeed < CAR_MIN_SPEED_KMH) {
-                    System.out.println("Скорость должна быть больше или равна " + CAR_MIN_SPEED_KMH);
-                } else if (carSpeed > CAR_MAX_SPEED_KMH) {
-                    System.out.println("Скорость должна быть меньше или равна " + CAR_MAX_SPEED_KMH);
+                if (!scanner.hasNextInt()) {
+                    System.out.println("Скорость - целочисленная величина!");
+                    scanner.next(); //Dummy read to clear input
                 } else {
-                    break;
+                    carSpeed = scanner.nextInt();
+                    if (carSpeed <= CAR_MIN_SPEED_KMH) {
+                        System.out.println("Скорость должна быть больше " + CAR_MIN_SPEED_KMH);
+                    } else if (carSpeed > CAR_MAX_SPEED_KMH) {
+                        System.out.println("Скорость должна быть меньше или равна " + CAR_MAX_SPEED_KMH);
+                    } else {
+                        break;
+                    }
                 }
             }
             carsInRace.add(new Car(carName,carSpeed));
